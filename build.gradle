@@ -1,0 +1,41 @@
+plugins {
+	// Note the 'net.fabricmc.' prefix - required as of 26.1, the plain
+	// 'fabric-loom' id is the old obfuscated-era plugin.
+	id 'net.fabricmc.fabric-loom' version "${loom_version}"
+}
+
+repositories {
+}
+
+dependencies {
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+
+	// No 'mappings' line: 26.x is unobfuscated, so Yarn/Intermediary are gone.
+	// Likewise these are plain implementation, not modImplementation.
+	implementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+}
+
+base {
+	archivesName = 'triviahelper'
+}
+
+processResources {
+	def version = project.version
+	inputs.property "version", version
+
+	filesMatching("fabric.mod.json") {
+		expand "version": version
+	}
+}
+
+tasks.withType(JavaCompile).configureEach {
+	it.options.release = 25
+	it.options.encoding = 'UTF-8'
+}
+
+java {
+	withSourcesJar()
+	sourceCompatibility = JavaVersion.VERSION_25
+	targetCompatibility = JavaVersion.VERSION_25
+}
