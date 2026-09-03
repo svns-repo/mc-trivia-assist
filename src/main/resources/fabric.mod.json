@@ -1,0 +1,23 @@
+{
+	"schemaVersion": 1,
+	"id": "triviahelper",
+	"version": "${version}",
+	"name": "Trivia Helper",
+	"description": "Captures trivia questions from chat, copies them to the clipboard, and provides a client-side converter for Roman numerals and arithmetic.",
+	"authors": [
+		"You"
+	],
+	"license": "MIT",
+	"environment": "client",
+	"entrypoints": {
+		"client": [
+			"com.oldmonroe.triviahelper.TriviaHelperClient"
+		]
+	},
+	"depends": {
+		"fabricloader": ">=0.19.3",
+		"minecraft": "~26.2",
+		"java": ">=25",
+		"fabric-api": "*"
+	}
+}
